@@ -11,5 +11,3 @@ my $card=$cards->[0];
 is ( $card->{'N'}{'givenName'}, "Testy");
 is ( $card->{'N'}{'familyName'}, "Tester");
 
-use Data::Dumper;
-print Dumper $cards;

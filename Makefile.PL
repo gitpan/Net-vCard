@@ -1,6 +1,6 @@
 use ExtUtils::MakeMaker;
 
-our $VERSION="0.3";
+our $VERSION="0.4";
 
 open ABSTRACT, "<", "ABSTRACT";
 our $ABSTRACT=<ABSTRACT>;
@@ -12,6 +12,9 @@ WriteMakefile(
     VERSION      => $VERSION,
     AUTHOR       => 'Jay J. Lawrence',
     ABSTRACT     => $ABSTRACT,
+    EXE_FILES    => [
+        'bin/vCard2label',
+    ],
     PREREQ_PM    => {
     },
 

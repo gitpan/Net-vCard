@@ -1,5 +1,8 @@
 Revision history for Perl extension Net::vCard
 
+0.4 added vCard2label script
+    a few more bug fixes
+
 0.3 Functional bug fixes
 
 0.2 UTF-16 support

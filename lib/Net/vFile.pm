@@ -317,10 +317,10 @@ Accessor for single text items
 
 sub _singleText {
 
-    if (exists $_[2]) {
+    if ($_[2]) {
         $_[0]->{$_[1]}{'val'}=$_[0];
     }
-    return $_[0]->{$_[1]};
+    return $_[0]->{$_[1]}{'val'};
 
 }
 

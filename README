@@ -1,3 +1,5 @@
+See also vCard2Label for a simple vCard PDF label maker.
+
 NAME
     Net::vCard - Read and write vCard files (RFC 2426). vCard files hold
     personal information that you would typically find on a business card.
@@ -10,7 +12,16 @@ SYNOPSIS
       my $cards=Net::vCard->loadFile( "addresses.vcf" );
 
       foreach my $card ( @$cards ) {
-        print $card->{'N'}{'firstName'}, " ", $card->{'N'}{'lastName'}, "\n";
+
+        print $card->givenName,       " ",  $card->familyName, "\n";
+        print $card->ADR->address,    "\n"; 
+        print $card->ADR->city,       " ",  $card->ADR->region, "\n";
+        print $card->ADR->postalCode, "\n";
+
+        print $card->ADR("home")->address,    "\n"; 
+        print $card->ADR("home")->city,       " ",  $card->ADR("home")->region, "\n";
+        print $card->ADR("home")->postalCode, "\n";
+
       }
 
 MODULE STATUS
@@ -37,6 +48,46 @@ ACCESSOR METHODS
     $vcard->prefixes( [ prefixes ] )
 
   ADDRESSES
+    To access address data:
+
+     $card->ADR( type )->field;
+     $card->ADR( )->city;           # Default address, city field
+     $card->ADR( "home" )->address; # Home address type, address field
+
+    $card->ADR( [type] )->country
+    $card->ADR( [type] )->poBox
+    $card->ADR( [type] )->city
+    $card->ADR( [type] )->region
+    $card->ADR( [type] )->address
+    $card->ADR( [type] )->postalCode
+    $card->ADR( [type] )->extendedAddress
+
+    There are some decisions to be taken wrt ADR values.
+
+    Firstly
+
+    As of now the RFC specifies action to take in the case of unlisted type
+    - the address gets four types - intl, parcel, postal, and work. This
+    implies that several types refer to the same address.
+
+    What I am doing for loading this data is storing the address in a hash
+    entry by the first name and listing the remainder in "_alias" hash key.
+
+    What happens when one of these addresses is updated? Do we copy all the
+    values to unique hash entries or do we update the common copy, requiring
+    the developer to explicitly declare a new address replace the common
+    entry.
+
+    If this doesn't make sense email me and I'll try another explaination.
+
+    Secondly
+
+    What about preferred addresses? For now I am going to let the module
+    user optionally request their preferred address type. If it does not
+    exist then we'll keep looking for less preferred address types like the
+    "pref" that was specified when loading vcard data, and finally the 4
+    default types.
+
 SUPPORT
     For technical support please email to jlawrenc@cpan.org ... for faster
     service please include "Net::vCard" and "help" in your subject line.
