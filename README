@@ -28,6 +28,15 @@ MODULE STATUS
       - keep in mind that I will be making a get/set method interface
       - once that is established you will need to use that interface instead
 
+ACCESSOR METHODS
+  NAME values
+    $vcard->familyName( [ familyName ] )
+    $vcard->givenName( [ givenName ] )
+    $vcard->additionalNames( [ additionalNames ] )
+    $vcard->suffixes( [ suffixes ] )
+    $vcard->prefixes( [ prefixes ] )
+
+  ADDRESSES
 SUPPORT
     For technical support please email to jlawrenc@cpan.org ... for faster
     service please include "Net::vCard" and "help" in your subject line.
@@ -46,7 +55,7 @@ COPYRIGHT
     with this module.
 
 ACKNOWLEDGEMENTS
-     Net::iCal - who's loading code inspired me for mine
+     Net::iCal - whose loading code inspired me for mine
 
 SEE ALSO
     RFC 2426, Net::iCal

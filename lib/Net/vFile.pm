@@ -77,7 +77,9 @@ sub loadFile {
 	foreach my $fn (@_) {
         my $fh;
         if (open $fh, $fn) {
-            $self->load($fh, $fn);
+            until (eof $fh) {
+                $self->load($fh, $fn);
+            }
         } else {
             warn "Cannot open $fn\n";
             next;
@@ -167,21 +169,21 @@ sub load {
         $decoder=Encode::find_encoding("UTF-16LE");
     }
 
-    # seek $fh, 0, 0;
+    my $thing="";
     while ( $_ ) {
 
         my $line = $decoder->decode($_);
         $line =~ s/[\r\n]+$//;
 
         if ($line =~ /^BEGIN:(.+)/) {
-            my $thing=$1;
+            $thing=$1;
             my $subclass= $classMap{uc $thing} || die "Don't know how to load ${thing}s\n";
             eval "use $subclass"; die $@ if $@;
             push @{$self->{$thing}}, $subclass->new->load($fh, $self);
             next;
-        }
+        } 
 
-        last if $line =~ /^END/;
+        last if $line =~ /^END:${thing}/;
 
         push @lines, $line;
 
@@ -457,7 +459,7 @@ LICENSE file included with this module.
 
 =head1 ACKNOWLEDGEMENTS
 
- Net::iCal - who's loading code inspired me for mine
+ Net::iCal - whose loading code inspired me for mine
 
 =head1 SEE ALSO
 

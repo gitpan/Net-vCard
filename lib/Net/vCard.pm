@@ -39,6 +39,79 @@ For those who really want to use this module right away
 use base qw(Net::vFile);
 $Net::vFile::classMap{'VCARD'}=__PACKAGE__;
 
+=head1 ACCESSOR METHODS
+
+=head2 NAME values
+
+=over 4
+
+=item $vcard->familyName( [ familyName ] )
+
+=cut
+
+sub familyName { 
+    if (exists $_[1]) {
+        $_[0]->{'N'}{'familyName'}=$_[1];
+    }
+    return $_[0]->{'N'}{'familyName'};
+};
+
+=item $vcard->givenName( [ givenName ] )
+
+=cut
+
+sub givenName { 
+    if (exists $_[1]) {
+        $_[0]->{'N'}{'givenName'}=$_[1];
+    }
+    return $_[0]->{'N'}{'givenName'};
+};
+
+=item $vcard->additionalNames( [ additionalNames ] )
+
+=cut
+
+sub additionalNames { 
+    if (exists $_[1]) {
+        $_[0]->{'N'}{'additionalNames'}=$_[1];
+    }
+    return $_[0]->{'N'}{'additionalNames'};
+};
+
+=item $vcard->suffixes( [ suffixes ] )
+
+=cut
+
+sub suffixes { 
+    if (exists $_[1]) {
+        $_[0]->{'N'}{'suffixes'}=$_[1];
+    }
+    return $_[0]->{'N'}{'suffixes'};
+};
+
+=item $vcard->prefixes( [ prefixes ] )
+
+=cut
+
+sub prefixes { 
+    if (exists $_[1]) {
+        $_[0]->{'N'}{'prefixes'}=$_[1];
+    }
+    return $_[0]->{'N'}{'prefixes'};
+};
+
+=back
+
+=head2 ADDRESSES
+
+=over 4
+
+=cut
+
+=back
+
+=cut
+
 sub FN   { $_[0]->_singleText( "FN", $_[1] ); }
 sub BDAY { $_[0]->_singleText( "BDAY", $_[1] ); }
 
@@ -175,7 +248,7 @@ LICENSE file included with this module.
 
 =head1 ACKNOWLEDGEMENTS
 
- Net::iCal - who's loading code inspired me for mine
+ Net::iCal - whose loading code inspired me for mine
 
 =head1 SEE ALSO
 
