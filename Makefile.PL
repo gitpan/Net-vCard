@@ -1,6 +1,6 @@
 use ExtUtils::MakeMaker;
 
-our $VERSION="0.4";
+our $VERSION="0.5";
 
 open ABSTRACT, "<", "ABSTRACT";
 our $ABSTRACT=<ABSTRACT>;

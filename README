@@ -1,4 +1,14 @@
-See also vCard2Label for a simple vCard PDF label maker.
+WARNING
+
+   - THIS MODULE WILL BE REPLACED IN A NUMBER OF DAYS BY Text::vCard
+   - Text::vCard is a joint effort between myself and another developer
+   - It will support a better API, more robust treatment of vCard data
+	 and even writing of vCards
+
+Thanks.
+
+  Jay
+
 
 NAME
     Net::vCard - Read and write vCard files (RFC 2426). vCard files hold
